@@ -25,9 +25,10 @@ var SearchAndListComponent = React.createClass({
       <div className="searchandlist">
         <input type="text" placeholder="Where are you?" value={this.state.location} onChange={this.handleLocationChange}/>
         <button className="btn btn-info waves-effect waves-light" onClick={this.search}>Search</button>
+        <p className="subtext">Search powered by Yelp</p>
         {this.state.restaurantlist.map(function(restaurant, i) {
-          return <BarComponent key={i} bardata={restaurant}/>
-        })}
+          return <BarComponent key={i} bardata={restaurant} username={this.props.username}/>
+        }.bind(this))}
       </div>
     );
   }

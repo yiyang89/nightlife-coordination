@@ -20,7 +20,18 @@ module.exports.search = function(location, callback) {
     radius: 20000
   }).then(response => {
     // TODO: STRIP ONLY NEEDED FIELDS FROM THIS RESPONSE.
-    callback(null, response)
+    var returnarr = response.jsonBody.businesses.map(function(business) {
+      return {
+        name: business.name,
+        image_url: business.image_url,
+        price: business.price,
+        rating: business.rating,
+        display_address: business.location.display_address.join(", "),
+        url: business.url,
+        going: []
+      }
+    })
+    callback(null, returnarr)
   }).catch(err => {
     console.log(err);
     callback(err, null);

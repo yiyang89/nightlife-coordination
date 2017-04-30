@@ -13,7 +13,7 @@ body {
   flex-direction: column;
 }
 .searchandlist {
-  margin-top: 2rem;
+  margin-top: 3rem;
   width: 98vw;
   display: -webkit-flex;
   display: flex;
@@ -39,6 +39,14 @@ body {
 .searchandlist input, button {
   width: 70%;
 }
+.goinglist {
+  /*position: fixed;*/
+  padding: 1rem;
+}
+.subtext {
+  color: white;
+  font-size: 0.8rem;
+}
 .bigcard img {
   width: 50%;
 }
@@ -53,11 +61,14 @@ body {
 .signup {
   width: 30%;
   margin-top: 5%;
-  z-index: 1;
+  z-index: 2;
   position: fixed;
 }
 .signup input {
   width: 80%;
+}
+.card-contents {
+  padding: 2rem;
 }
 input {
   margin-bottom: 2rem;
@@ -67,7 +78,7 @@ input {
 .bigcard button {
   width: 100%;
   margin: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .bigcard {
   width: 60vw;
@@ -82,6 +93,9 @@ input {
   text-align: center;
   z-index: 2;
   position: absolute;
+}
+.dropdownsubmit {
+  text-align: center;
 }
 .dropdownloggedin {
   width: 10%;

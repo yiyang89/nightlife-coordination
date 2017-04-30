@@ -28,10 +28,67 @@ app.get('/search/', function(request, response) {
       console.log("Error searching yelp for location: " + request.query.location);
       response.send({error: err});
     } else {
-      response.send(result.jsonBody.businesses);
+      // TODO: CROSS REFERENCE WITH MONGO DATA BEFORE RETURNING RESPONSE.
+      mongowrap.updatetotoday(mongo, formatDate(new Date()), result, function(err, updateresult) {
+        if (err) {
+          response.send({error: err});
+        } else {
+          mongowrap.crossreference(mongo, result, function(err, crossresult) {
+            if (err) {
+              response.send({error: err});
+            } else {
+              stripdatesfromgoing(crossresult);
+              response.send(crossresult);
+            }
+          })
+        }
+      })
     }
   })
 })
+
+app.get('/going/', function(request, response) {
+  var bardata = JSON.parse(decodeURIComponent(request.query.bardata));
+  console.log(request.query.username + " is going to " + bardata.name);
+  mongowrap.going(mongo, formatDate(new Date()), request.query.username,bardata, function(err, result) {
+    // Returns updated bardata for what was received.
+    if (err) {
+      response.send({error: err});
+    } else {
+      // console.log(result);
+      stripdatesfromgoing([result]);
+      response.send(result);
+    }
+  })
+})
+
+app.get('/notgoing/', function(request, response) {
+  var bardata = JSON.parse(decodeURIComponent(request.query.bardata));
+  console.log(request.query.username + " is not going to " + bardata.name);
+  mongowrap.notgoing(mongo, formatDate(new Date()), request.query.username, bardata, function(err, result) {
+    // Returns updated bardata for what was received.
+    if (err) {
+      response.send({error: err});
+    } else {
+      stripdatesfromgoing([result]);
+      response.send(result);
+    }
+  })
+})
+
+function stripdatesfromgoing(resultarray) {
+  resultarray.forEach(function(result) {
+    result.going = result.going.map(function(goingentry) {
+      return goingentry.name;
+
+    })
+  })
+}
+
+function formatDate(dateObject) {
+  return dateObject.getFullYear() + "-" + ('0' + (dateObject.getMonth()+1)).slice(-2) + "-" + ('0' + dateObject.getDate()).slice(-2);
+}
+
 
 app.get('/tokendetails/', function(request, response) {
   // Query mongodb for profile corresponding to access token.
