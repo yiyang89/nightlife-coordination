@@ -1,0 +1,32 @@
+{
+  "name": "nightlife-coordination",
+  "version": "1.0.0",
+  "description": "nightlife coordination web app implementing yelp as a data source",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yiyang89/nightlife-coordination.git"
+  },
+  "keywords": [
+    "reactjs",
+    "nodejs",
+    "express",
+    "yelpapi"
+  ],
+  "author": "Yiyang Kok",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yiyang89/nightlife-coordination/issues"
+  },
+  "homepage": "https://github.com/yiyang89/nightlife-coordination#readme",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "mongodb": "^2.2.26",
+    "sha1": "^1.1.1",
+    "uuid": "^3.0.1"
+  }
+}

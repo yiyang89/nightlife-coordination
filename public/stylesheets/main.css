@@ -1,0 +1,227 @@
+body {
+  background-color: #3E4551;
+}
+.Aligner {
+  /*height: 100vh;*/
+  width: 100%;
+  font-family: Arial;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  /*justify-content: center;*/
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.error {
+  width: 100%;
+  color: white;
+  background-color: #ef9a9a;
+  opacity: 0.8;
+  text-align:center;
+  border-radius: 2px;
+}
+.signup {
+  width: 30%;
+  margin-top: 5%;
+  z-index: 1;
+  position: fixed;
+}
+.signup input {
+  width: 80%;
+}
+input {
+  margin-bottom: 2rem;
+  width: 80%;
+  text-align: center;
+}
+.profilecard input {
+  width: 70%;
+  margin-left: auto;
+}
+.bigcard button {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 2rem;
+}
+.btn-row button {
+  width: 50%;
+  margin: 0;
+}
+.bigcard {
+  width: 60vw;
+  padding: 4rem;
+  margin-top: 3%;
+  text-align: center;
+  position: absolute;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  z-index: 1;
+}
+.smallcard {
+  width: 40vw;
+  padding: 4rem;
+  margin-top: 5%;
+  text-align: center;
+  z-index: 2;
+  position: absolute;
+}
+.card-contents {
+  margin: 2rem;
+}
+.dropdownloggedin {
+  width: 10%;
+}
+.dropdownsubmit {
+  text-align: center;
+  width: 10%;
+}
+.dropdown input {
+  width: 80%;
+  margin: 0.5rem;
+  text-align: center;
+}
+.grid-by-rows {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+.grid-by-columns {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: center;
+  width: 99%;
+}
+.flexMasonry {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100vw;
+  max-height: 800px;
+  font-size: 0;
+}
+.subtext {
+  font-size: 0.75rem;
+}
+.grid-item {
+  width: 100%;
+  margin: 0.5rem;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+.grid-item a {
+  width: 100%;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+img {
+  width: 95%;
+  margin-top: 0.5rem;
+}
+.description-row {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  width: 95%;
+  min-height: 3rem;
+}
+.profilerow, .profilerow input, .profilerow input:disabled {
+  font-size: 1.5rem;
+  color: #292b2c;
+  margin-bottom: 1rem;
+}
+.description-row button {
+  margin: 0;
+  padding: 0.5rem;
+}
+.description-row .btn-default, .btn-default-dark {
+  height: 32px;
+  width: 38px;
+  white-space:nowrap !important;
+}
+.description-text {
+  margin-right: auto;
+}
+.btn-info {
+  background-color: #00bcd4 !important;
+}
+.selectedcard {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.selectedresult, .searchresult {
+  display: -webkit-flex;
+  display: flex;
+}
+.searchresult:hover {
+  background-color: #e0f7fa;
+}
+.selectedresult {
+  background-color: #80deea;
+}
+.searchresulttext {
+  margin-left: 1rem;
+  text-align: left;
+  width: 85%;
+}
+.searchresultimagebox {
+  width: 7%;
+}
+.mosaic {
+  width: 97vw;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.mosaicitemcard {
+  width: 300px;
+  margin: 0.5rem;
+}
+.mosaicitemcard button {
+  /*margin-top: auto;*/
+  margin-bottom: 1rem;
+  width: 70%;
+}
+.mosaicitemcard p {
+  margin-top: 2rem;
+  margin: 1rem;
+}
+.mosaicitemcard img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+}
+.tradeitem {
+  width: 50%;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+.rejectedtrade {
+  background-color: #ffcdd2;
+}
+.completedtrade {
+  background-color: #c8e6c9;
+}
+.locationcard {
+  margin-bottom: 0.5rem !important;
+  margin-top: auto;
+  width: 63%;
+  text-transform: uppercase;
+  color: white;
+  background-color: #6b8a99;
+  align-items: center;
+  font-weight: 200;
+}
