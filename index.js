@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var mongowrap = require('./scripts/mongowrap.js');
+var yelpwrap = require('./scripts/yelpwrap.js');
 var path = require('path');
 var http = require('http');
 var mongodb = require('mongodb');
@@ -12,9 +13,6 @@ var MongoClient = mongodb.MongoClient;
 var url = process.env.MONGO_ADDRESS;
 var mongo;
 
-// Each type of passport plugin will require its specific oauth strategy.
-// Need to create credentials on https://console.developers.google.com/
-// MOVE THESE INTO ENV VARIABLES BEFORE DEPLOYING.
 app.set('port', (process.env.PORT || 5000));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -23,6 +21,17 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(request, response) {
   response.render('pages/index', {'user':null, 'token':null});
 });
+
+app.get('/search/', function(request, response) {
+  yelpwrap.search(request.query.location, function(err, result) {
+    if (err) {
+      console.log("Error searching yelp for location: " + request.query.location);
+      response.send({error: err});
+    } else {
+      response.send(result.jsonBody.businesses);
+    }
+  })
+})
 
 app.get('/tokendetails/', function(request, response) {
   // Query mongodb for profile corresponding to access token.

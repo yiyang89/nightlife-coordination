@@ -13,7 +13,7 @@ var AppComponent = React.createClass({
       loggedin: true,
       showpopup: false,
       popuptext: '',
-      booklist: []
+      showsignup: false
     }
   },
   componentWillMount: function() {
@@ -32,7 +32,7 @@ var AppComponent = React.createClass({
           accesstokenserver: result.accessToken,
           accesstokenlocal: localStorage._nlc_accesstoken,
           loggedin: true,
-          booklist: result.booklist
+          showsignup: false
         })
       }.bind(this))
     } else {
@@ -42,9 +42,9 @@ var AppComponent = React.createClass({
     }
   },
   hideAll: function() {
-    // this.setState({
-    //   showprofile: false
-    // })
+    this.setState({
+      showsignup: false
+    })
   },
   logout: function() {
     // Empty localstorage
@@ -57,7 +57,8 @@ var AppComponent = React.createClass({
         profile: null,
         accesstokenserver: null,
         accesstokenlocal: null,
-        loggedin: false
+        loggedin: false,
+        showsignup: false
       });
       console.log("logged out.");
     }.bind(this));
@@ -95,10 +96,13 @@ var AppComponent = React.createClass({
           accesstokenserver: result.accessToken,
           accesstokenlocal: localStorage._nlc_accesstoken,
           loggedin: true,
-          booklist: result.booklist
         });
       }
     }.bind(this))
+  },
+  showsignup: function() {
+    this.hideAll();
+    this.setState({showsignup: !this.state.showsignup});
   },
   showpopup: function(message) {
     this.setState({showpopup:true, popuptext:message});
@@ -107,6 +111,7 @@ var AppComponent = React.createClass({
     this.setState({showpopup: false, popuptext:''});
   },
   render: function() {
+    console.log("LOGGEDIN: " + this.state.loggedin);
     return (
       <div>
         <nav className="navbar navbar-toggleable-md navbar-dark cyan">
@@ -120,13 +125,15 @@ var AppComponent = React.createClass({
                 <div className="collapse navbar-collapse" id="navbarNav1">
                     <ul className="navbar-nav mr-auto">
                     </ul>
+                    {this.state.loggedin? null : <a className="nav-link" onClick={this.showsignup}>Sign Up</a>}
                     <DropdownComponent loggedin={this.state.loggedin} username={this.state.username} logoutfunc={this.logout} loginfunc={this.login}/>
                 </div>
             </div>
         </nav>
         <div className="Aligner">
-        {this.state.loggedin? null : <SignUpComponent signupfunc={this.signup}/>}
+        {this.state.showsignup? <SignUpComponent signupfunc={this.signup}/> : null}
         {this.state.showpopup? <PopupComponent content={this.state.popuptext} closefunc={this.closepopup}/> : null}
+        <SearchAndListComponent username={this.state.username} />
         </div>
       </div>
     );
