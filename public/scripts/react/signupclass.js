@@ -1,23 +1,36 @@
-var SignUpComponent = React.createClass({
-  getInitialState: function() {
-    return {
+import React from "react";
+
+class SignUpComponent extends React.Component{
+  constructor(props) {
+    super(props);
+
+    this.handleChangeUsername = this.handleChangeUsername.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleChangeConfirm = this.handleChangeConfirm.bind(this);
+    this.submit = this.submit.bind(this);
+
+    this.state = {
       username: '',
       password: '',
       confirmpassword: '',
       nomatch: false,
       emptyfields: false
     }
-  },
-  handleChangeUsername: function(event) {
+  }
+
+  handleChangeUsername(event) {
     this.setState({username: event.target.value});
-  },
-  handleChangePassword: function(event) {
+  }
+
+  handleChangePassword(event) {
     this.setState({password: event.target.value});
-  },
-  handleChangeConfirm: function(event) {
+  }
+
+  handleChangeConfirm(event) {
     this.setState({confirmpassword: event.target.value});
-  },
-  submit: function() {
+  }
+
+  submit() {
     // Check that passwords match
     if (this.state.username.trim() === '' || this.state.password.trim() === '' || this.state.confirmpassword.trim() ===  '') {
       this.setState({emptyfields: true, nomatch: false});
@@ -29,8 +42,9 @@ var SignUpComponent = React.createClass({
       // SHA-1 hashing compliments of https://github.com/emn178/js-sha1
       this.props.signupfunc(this.state.username, sha1(this.state.password), this.state.location, this.state.email, this.state.fullname);
     }
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <div className="Aligner card signup">
         <div className="card-contents grid-by-rows">
@@ -44,4 +58,6 @@ var SignUpComponent = React.createClass({
       </div>
     );
   }
-})
+}
+
+export default SignUpComponent;

@@ -1,11 +1,18 @@
-var BarComponent = React.createClass({
-  getInitialState: function() {
-    return {
+import React from "react";
+
+class BarComponent extends React.Component{
+  constructor(props){
+    super(props);
+
+    this.toggleGoing = this.toggleGoing.bind(this);
+
+    this.state = {
       goinglist: this.props.bardata.going,
       showgoing: false
     };
-  },
-  toggleGoing: function() {
+  }
+
+  toggleGoing() {
     var params = "?&username="+this.props.username+"&bardata="+encodeURIComponent(JSON.stringify(this.props.bardata));
     if (this.state.goinglist.includes(this.props.username)) {
       $.getJSON('/notgoing/'+params, function(result) {
@@ -24,21 +31,9 @@ var BarComponent = React.createClass({
         }
       }.bind(this))
     }
-  },
-  togglegoing: function() {
-    this.setState({
-      showgoing: !this.state.showgoing
-    })
-  },
-  render: function() {
-    // <a onClick={this.togglegoing}>Who's going?</a>
-    // {this.state.showgoing? (
-    //   <div className="card goinglist">
-    //     {this.state.goinglist.map(function(name, i) {
-    //       return <div key={i}>{name}<br/></div>
-    //     })}
-    //   </div>) : null
-    // }
+  }
+
+  render() {
     var imagesource = this.props.bardata.image_url? this.props.bardata.image_url : 'images/placeholder.gif';
     var price = this.props.bardata.price? this.props.bardata.price : 'Not available';
     var rating = this.props.bardata.rating? this.props.bardata.rating : 'Not available';
@@ -61,4 +56,6 @@ var BarComponent = React.createClass({
       </div>
     )
   }
-})
+}
+
+export default BarComponent;

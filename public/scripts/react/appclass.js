@@ -1,22 +1,40 @@
-var AppComponent = React.createClass({
-  getInitialState: function() {
-    var login = accessTokenFromServer? true : false;
+import React from "react";
+import DropdownComponent from "./dropdownclass";
+import SignUpComponent from "./signupclass";
+import PopupComponent from "./popupclass";
+import SearchAndListComponent from "./searchandlistclass";
+
+class AppComponent extends React.Component{
+  constructor(props) {
+    super(props);
+
+    this.hideAll = this.hideAll.bind(this);
+    this.logout = this.logout.bind(this);
+    this.signup = this.signup.bind(this);
+    this.login = this.login.bind(this);
+    this.showsignup = this.showsignup.bind(this);
+    this.showpopup = this.showpopup.bind(this);
+    this.closepopup = this.closepopup.bind(this);
+
+    var login = this.props.servertoken? true : false;
     if (login) {
-      localStorage._nlc_accesstoken = accessTokenFromServer;
+      localStorage._nlc_accesstoken = this.props.servertoken;
     }
-    return {
-      username: username,
+
+    this.state = {
+      username: this.props.username,
       profile: null,
       location: null,
-      accesstokenserver: accessTokenFromServer,
+      accesstokenserver: this.props.servertoken,
       accesstokenlocal: localStorage._nlc_accesstoken,
       loggedin: true,
       showpopup: false,
       popuptext: '',
       showsignup: false
     }
-  },
-  componentWillMount: function() {
+  }
+
+  componentDidMount() {
     console.log("Component mounted");
     if (localStorage._nlc_accesstoken) {
       console.log("Localstorage nlc accesstoken is not null");
@@ -40,13 +58,15 @@ var AppComponent = React.createClass({
         loggedin: false
       })
     }
-  },
-  hideAll: function() {
+  }
+
+  hideAll() {
     this.setState({
       showsignup: false
     })
-  },
-  logout: function() {
+  }
+
+  logout() {
     // Empty localstorage
     var params = "?&accesstoken="+this.state.accesstokenserver;
     $.getJSON('/logout/'+params, function(result) {
@@ -62,8 +82,9 @@ var AppComponent = React.createClass({
       });
       console.log("logged out.");
     }.bind(this));
-  },
-  signup: function(signupname, passwordhash) {
+  }
+
+  signup(signupname, passwordhash) {
     var params = "?&username="+signupname+"&passwordhash="+passwordhash;
     $.getJSON('/signup/'+params, function(result) {
       if (result.error) {
@@ -77,12 +98,14 @@ var AppComponent = React.createClass({
           profile: result.profile,
           accesstokenserver: result.accessToken,
           accesstokenlocal: localStorage._nlc_accesstoken,
-          loggedin: true
+          loggedin: true,
+          showsignup: false
         })
       }
     }.bind(this))
-  },
-  login: function(username, passwordhash) {
+  }
+
+  login(username, passwordhash) {
     var params = "?&username="+username+"&passwordhash="+passwordhash;
     $.getJSON('/login/'+params, function(result) {
       if (result.error) {
@@ -99,18 +122,22 @@ var AppComponent = React.createClass({
         });
       }
     }.bind(this))
-  },
-  showsignup: function() {
+  }
+
+  showsignup() {
     this.hideAll();
     this.setState({showsignup: !this.state.showsignup});
-  },
-  showpopup: function(message) {
+  }
+
+  showpopup(message) {
     this.setState({showpopup:true, popuptext:message});
-  },
-  closepopup: function() {
+  }
+
+  closepopup() {
     this.setState({showpopup: false, popuptext:''});
-  },
-  render: function() {
+  }
+
+  render() {
     console.log("LOGGEDIN: " + this.state.loggedin);
     return (
       <div>
@@ -138,4 +165,6 @@ var AppComponent = React.createClass({
       </div>
     );
   }
-});
+}
+
+export default AppComponent;

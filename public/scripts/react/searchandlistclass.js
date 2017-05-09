@@ -1,11 +1,21 @@
-var SearchAndListComponent = React.createClass({
-  getInitialState: function() {
-    return {location: '', restaurantlist: []};
-  },
-  handleLocationChange: function(event) {
+import React from "react";
+import BarComponent from "./barresultclass";
+
+class SearchAndListComponent extends React.Component{
+  constructor(props){
+    super(props);
+
+    this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.search = this.search.bind(this);
+
+    this.state = {location: '', restaurantlist: []};
+  }
+
+  handleLocationChange(event) {
     this.setState({location: event.target.value});
-  },
-  search: function() {
+  }
+
+  search() {
     if (this.state.location.trim() === '') {
       alert('Please enter a location');
     } else {
@@ -19,8 +29,9 @@ var SearchAndListComponent = React.createClass({
         }
       }.bind(this))
     }
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <div className="searchandlist">
         <input type="text" placeholder="Where are you?" value={this.state.location} onChange={this.handleLocationChange}/>
@@ -32,4 +43,6 @@ var SearchAndListComponent = React.createClass({
       </div>
     );
   }
-})
+}
+
+export default SearchAndListComponent;
