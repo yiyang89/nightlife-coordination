@@ -1,4 +1,5 @@
 import React from "react";
+import sha1 from "../sha1";
 
 class DropdownComponent extends React.Component{
   constructor(props) {
